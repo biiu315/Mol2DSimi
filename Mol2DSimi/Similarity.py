@@ -23,7 +23,7 @@ from rdkit.Chem import (
     Descriptors,
     MACCSkeys,
     rdFingerprintGenerator,)
-from map4 import MAP4Calculator
+from map4trial import MAP4Calculator
 m4_calc = MAP4Calculator(is_folded=True)
 from rdkit.Avalon import pyAvalonTools as fpAvalon
 
@@ -125,7 +125,7 @@ class similarity_calculate:
             elif 'dice' in values:
                 self.dice_col.append(values)
         display(self.data.head(5))
-        self.data.to_csv(f"./Raw_data/{self.query.GetProp('_Name')}.csv")
+        self.data.to_csv(f"./Raw_data/raw_result.csv")
         
     def plot(self):
         for i in range(len(self.tani_col)):
@@ -133,7 +133,7 @@ class similarity_calculate:
             sns.histplot(data = self.data, x=self.data[self.tani_col[i]],hue=self.data[self.active_col], ax=axes[0], kde = True, )
             sns.histplot(data = self.data, x=self.data[self.dice_col[i]],hue=self.data[self.active_col], ax=axes[1], kde = True, )
         
-            fig.savefig(f"./Image/{self.query.GetProp('_Name')}_{self.tani_col[i][9:]}.png", transparent = True, dpi = 600)
+            fig.savefig(f"./Image/png_{self.tani_col[i][9:]}.png", transparent = True, dpi = 600)
             plt.show()
         
     def display_mol(self):
